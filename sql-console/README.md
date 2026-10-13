@@ -135,6 +135,15 @@ Query history is kept locally by the app UI (per machine), capped at 50 entries.
 Tools use Minnow's normal per-tool permission model (**Ask / Full / Off**).
 Unattended server agents and boards only see plugin tools granted **Full**.
 
-All eight tools ship **enabled and granted Full**, so chat and unattended agents
-can use them without a prompt. Change any of them in **Settings → Plugins →
-SQL Console → Tools, panels and connections**.
+**A fresh install defaults every tool to Ask each time.** Minnow's API v1 has no
+manifest field for permissions, so a plugin cannot ship a default — the value is
+per-machine and lives in `~/.minnow/tools.json` under
+`permissions.default["plugin__sql_console__<tool>"]`. Minnow's Settings UI falls
+back to `ask` whenever that key is absent, which is why a newly installed plugin
+prompts on first use.
+
+To run without prompts, set each tool to **Full** in
+**Settings → Plugins → SQL Console → Tools, panels and connections**. The choice
+persists across updates and reloads. Note that Minnow rewrites `tools.json` from
+its own in-memory config, so editing that file by hand can be overwritten — use
+the Settings UI (or set it while Minnow is closed).

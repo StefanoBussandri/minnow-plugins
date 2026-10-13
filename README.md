@@ -58,9 +58,11 @@ Notes on how Minnow installs from GitHub:
   rather than failing or silently cutting off.
 - **Durable state.** Snippets, collections and environments are stored under
   `~/.minnow/plugins/data/<package>/` and survive reloads and restarts.
-- **Full permission by default.** Every tool in both packages ships enabled with
-  **Full** permission, so chat and unattended agents can call them without
-  prompting. Adjust per tool in **Settings → Plugins**.
+- **Permissions are per-machine, not per-package.** Minnow's API v1 has no
+  manifest field for tool permissions, so a fresh install defaults every tool of
+  both plugins to **Ask each time**. Grant **Full** per tool in
+  **Settings → Plugins** to let chat and unattended agents call them without a
+  prompt; the choice persists across updates and reloads.
 
 ## Where they appear in the UI
 

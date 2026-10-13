@@ -124,6 +124,15 @@ Tools use Minnow's normal per-tool permission model (**Ask / Full / Off**).
 `http_request` and `http_run_collection_item` make outbound network calls from
 the native handler; review that before granting **Full** to unattended agents.
 
-All eight tools ship **enabled and granted Full**, including the two write tools
-(`http_save_collection`, `http_delete_collection`). Change any of them in
-**Settings → Plugins → API Scratchpad → Tools, panels and connections**.
+**A fresh install defaults every tool to Ask each time**, including the two write
+tools (`http_save_collection`, `http_delete_collection`). Minnow's API v1 has no
+manifest field for permissions, so a plugin cannot ship a default — the value is
+per-machine and lives in `~/.minnow/tools.json` under
+`permissions.default["plugin__api_scratch__<tool>"]`. Minnow's Settings UI falls
+back to `ask` whenever that key is absent.
+
+To run without prompts, set each tool to **Full** in
+**Settings → Plugins → API Scratchpad → Tools, panels and connections**. The
+choice persists across updates and reloads. Note that Minnow rewrites
+`tools.json` from its own in-memory config, so editing that file by hand can be
+overwritten — use the Settings UI (or set it while Minnow is closed).
