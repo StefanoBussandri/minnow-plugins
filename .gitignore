@@ -1,0 +1,18 @@
+# Dependencies and build output — plugin packages are plain ESM, so neither
+# should ever be committed (and submodule contents are omitted from GitHub
+# archives anyway).
+node_modules/
+dist/
+dist-electron/
+release/
+
+# Local scratch
+.ref/
+_check/
+_testbed/
+*.local.*
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.log
